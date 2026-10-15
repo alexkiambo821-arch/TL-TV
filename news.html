@@ -124,6 +124,7 @@
     <a href="index.html">Back to Home ↑</a>
   </footer>
   
+
 <section id="cms-news-feed" style="max-width:1100px;margin:40px auto;padding:20px;color:white;">
   <h2>Latest News from TL TV</h2>
   <div id="cms-news-list">Loading latest stories...</div>
@@ -132,48 +133,31 @@
 <script>
 (async function () {
   const list = document.getElementById("cms-news-list");
-  const folderURL =
-    "https://api.github.com/repos/alexkiambo821-arch/TL-TV/contents/news";
+
+  // Read the article directly, without using the GitHub API.
+  const articleFiles = [
+    "https://raw.githubusercontent.com/alexkiambo821-arch/TL-TV/main/news/kenya-raises-fuel-prices-as-petrol-diesel-and-kerosene-costs-climb.md"
+  ];
 
   try {
-    const response = await fetch(folderURL);
-    if (!response.ok) throw new Error("Could not load news");
-    const files = await response.json();
+    list.textContent = "";
 
-    const articles = files.filter(file =>
-      file.name.endsWith(".md")
-    );
+    for (const url of articleFiles) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Article could not load");
 
-    if (!articles.length) {
-      list.textContent = "No news stories published yet.";
-      return;
-    }
+      const markdown = await response.text();
+      const match = markdown.match(/^---\s*\r?\n([\s\S]*?)\r?\n---/);
 
-    list.innerHTML = "";
-
-    for (const file of articles.reverse()) {
-      const articleResponse = await fetch(file.download_url);
-      if (!articleResponse.ok) continue;
-
-      const markdown = await articleResponse.text();
-      const frontmatter = markdown.match(/^---\s*\n([\s\S]*?)\n---/);
-
-      if (!frontmatter) continue;
+      if (!match) continue;
 
       const meta = {};
-      const lines = frontmatter[1].split("\n");
-      let currentKey = "";
-
-      for (const line of lines) {
-        const match = line.match(/^([a-zA-Z_]+):\s*(.*)$/);
-
-        if (match) {
-          currentKey = match[1];
-          meta[currentKey] = match[2].replace(/^["']|["']$/g, "");
-        } else if (currentKey && /^\s+/.test(line)) {
-          meta[currentKey] += " " + line.trim().replace(/^["']|["']$/g, "");
+      match[1].split(/\r?\n/).forEach(line => {
+        const field = line.match(/^([a-zA-Z_]+):\s*(.*)$/);
+        if (field) {
+          meta[field[1]] = field[2].replace(/^["']|["']$/g, "");
         }
-      }
+      });
 
       if (!meta.title) continue;
 
@@ -181,23 +165,14 @@
       card.style.cssText =
         "margin:24px 0;padding:20px;border:1px solid #34344f;border-radius:12px;background:#101326;";
 
-      if (meta.image && /^https?:\/\//i.test(meta.image)) {
-        const image = document.createElement("img");
-        image.src = meta.image;
-        image.alt = meta.title;
-        image.style.cssText =
-          "width:100%;max-height:360px;object-fit:cover;border-radius:8px;";
-        card.appendChild(image);
-      }
-
       const category = document.createElement("p");
       category.textContent = meta.category || "Kenya";
       category.style.color = "#62a5ff";
       card.appendChild(category);
 
-      const heading = document.createElement("h3");
-      heading.textContent = meta.title;
-      card.appendChild(heading);
+      const title = document.createElement("h2");
+      title.textContent = meta.title;
+      card.appendChild(title);
 
       if (meta.date) {
         const date = document.createElement("p");
@@ -206,18 +181,47 @@
         card.appendChild(date);
       }
 
+      if (meta.image && /^https?:\/\//i.test(meta.image)) {
+        const img = document.createElement("img");
+        img.src = meta.image;
+        img.alt = meta.title;
+        img.style.cssText =
+          "width:100%;max-height:400px;object-fit:cover;border-radius:8px;";
+        img.onerror = () => img.remove();
+        card.appendChild(img);
+      }
+
       const summary = document.createElement("p");
       summary.textContent = meta.summary || "";
       card.appendChild(summary);
 
-      const link = document.createElement("a");
-      link.href = "https://github.com/alexkiambo821-arch/TL-TV/blob/main/" + file.path;
-      link.textContent = "Read full story on GitHub";
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.style.color = "#62a5ff";
-      card.appendChild(link);
+      const body = markdown.slice(match[0].length).trim();
+      const story = document.createElement("div");
+      story.style.cssText = "line-height:1.8;margin-top:20px;";
 
+      body.split(/\r?\n/).forEach(line => {
+        const text = line.trim();
+        if (!text) return;
+
+        let element;
+        if (text.startsWith("### ")) {
+          element = document.createElement("h4");
+          element.textContent = text.slice(4);
+        } else if (text.startsWith("## ")) {
+          element = document.createElement("h3");
+          element.textContent = text.slice(3);
+        } else if (text.startsWith("# ")) {
+          element = document.createElement("h3");
+          element.textContent = text.slice(2);
+        } else {
+          element = document.createElement("p");
+          element.textContent = text;
+        }
+
+        story.appendChild(element);
+      });
+
+      card.appendChild(story);
       list.appendChild(card);
     }
 
@@ -228,6 +232,8 @@
     list.textContent = "News could not load. Please try again later.";
   }
 })();
+</script>
+
 </script>
 
 </body>
