@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080c18">
+  <title>Newsroom | TL TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .news-hero {
+      padding: 70px 6%;
+      background: linear-gradient(120deg, #111a2c, #080c18);
+      border-bottom: 1px solid #ffffff12;
+    }
+    .news-hero p {
+      color: #aab5cb;
+      margin-top: 15px;
+      line-height: 1.8;
+      max-width: 600px;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .news-card {
+      background: #111a2c;
+      border: 1px solid #ffffff12;
+      border-radius: 9px;
+      padding: 24px;
+    }
+    .news-card small {
+      color: #729fff;
+      letter-spacing: 2px;
+    }
+    .news-card h2 {
+      font-size: 21px;
+      margin-top: 15px;
+    }
+    .news-card p {
+      color: #aab5cb;
+      line-height: 1.8;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    @media (max-width: 650px) {
+      .news-grid { grid-template-columns: 1fr; }
+      .news-hero { padding: 50px 5%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">TL</span>
+      <span>
+        <span class="brand-name">TL TV</span>
+        <span class="brand-tag" style="display:block">TWANGAA</span>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="shows.html">Shows</a>
+      <a href="live.html">Live TV</a>
+      <a href="production.html">Production</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="news-hero">
+    <p style="color:#ff5966;letter-spacing:3px;font-size:11px;font-weight:bold">THE TL TV NEWSROOM</p>
+    <h1 style="margin-top:20px">Stories that <span style="color:#ed2939">matter.</span></h1>
+    <p>News, current affairs and stories shaping Kenya and the world. Stay informed with TL TV — TWANGAA.</p>
+  </section>
+
+  <main class="section">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">EXPLORE THE NEWS</p>
+        <h2>Newsroom</h2>
+      </div>
+      <p class="section-note">Your world. Your stories.</p>
+    </div>
+
+    <div class="news-grid">
+      <article class="news-card">
+        <small>KENYA</small>
+        <h2>Kenya News</h2>
+        <p>Local stories, national developments and the issues affecting communities across Kenya.</p>
+      </article>
+      <article class="news-card">
+        <small>WORLD</small>
+        <h2>World News</h2>
+        <p>Important international developments, global affairs and stories from around the world.</p>
+      </article>
+      <article class="news-card">
+        <small>BUSINESS</small>
+        <h2>Business & Economy</h2>
+        <p>Business updates, entrepreneurship, technology and economic developments.</p>
+      </article>
+      <article class="news-card">
+        <small>SPORTS</small>
+        <h2>Sports Desk</h2>
+        <p>Fixtures, results, sporting personalities and the moments fans are talking about.</p>
+      </article>
+      <article class="news-card">
+        <small>POLITICS</small>
+        <h2>Politics & Current Affairs</h2>
+        <p>Political developments, public policy and national conversations.</p>
+      </article>
+      <article class="news-card">
+        <small>ENTERTAINMENT</small>
+        <h2>Entertainment News</h2>
+        <p>Music, celebrities, culture and the latest happenings in entertainment.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2026 TL TV · TWANGAA</span>
+    <span>News. Stories. Entertainment.</span>
+    <a href="index.html">Back to Home ↑</a>
+  </footer>
+</body>
+</html>
