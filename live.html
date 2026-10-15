@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live TV | TL TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .live-hero {
+      padding: 35px 20px;
+      text-align: center;
+      margin: 25px 0;
+      background: linear-gradient(135deg, #10152d, #24113d, #111827);
+      border-radius: 16px;
+    }
+    .live-label {
+      display: inline-block;
+      padding: 7px 14px;
+      background: #e5223e;
+      color: white;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .live-hero h1 {
+      font-size: clamp(32px, 6vw, 54px);
+      margin: 18px 0 10px;
+    }
+    .live-hero h1 span { color: #ff334f; }
+    .player {
+      background: #05070d;
+      border: 1px solid #29324c;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 25px 0;
+    }
+    .player-screen {
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+      background: radial-gradient(ellipse at center, #202448, #080b14 75%);
+    }
+    .player-screen .play {
+      font-size: 52px;
+      margin-bottom: 12px;
+    }
+    .player-screen h2 { margin: 8px 0; }
+    .player-screen p { color: #b8c1d8; }
+    .player-note {
+      padding: 18px;
+      color: #aeb8d0;
+      line-height: 1.6;
+    }
+    .live-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin: 25px 0;
+    }
+    .info-card {
+      background: #11172a;
+      border: 1px solid #252d46;
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .info-card p { line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="index.html">TL <span>TV</span></a>
+    <div class="tagline">TWANGAA</div>
+  </header>
+
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="shows.html">Shows</a>
+    <a href="live.html">Live TV</a>
+    <a href="production.html">Production</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main class="container">
+    <section class="live-hero">
+      <span class="live-label">TL TV • LIVE</span>
+      <h1>Watch Us <span>Live</span></h1>
+      <p>Your stories. Your people. Your screen.</p>
+    </section>
+
+    <section class="player">
+      <div class="player-screen">
+        <div class="play">▶</div>
+        <h2>TL TV Live Stream</h2>
+        <p>Our broadcast player will appear here.</p>
+      </div>
+      <div class="player-note">
+        <strong>Getting ready to go live?</strong>
+        <p>This player is a placeholder for now. We'll connect your YouTube livestream after configuring vMix.</p>
+      </div>
+    </section>
+
+    <h2>Welcome to TL TV</h2>
+    <p>Stay tuned for live broadcasts, special events, interviews and community stories.</p>
+
+    <section class="live-info">
+      <article class="info-card">
+        <h3>📡 Live Broadcasts</h3>
+        <p>Watch events and programmes as they happen when TL TV is streaming.</p>
+      </article>
+      <article class="info-card">
+        <h3>🎬 Special Events</h3>
+        <p>Catch selected events, interviews and coverage from our team.</p>
+      </article>
+      <article class="info-card">
+        <h3>🔔 Stay Connected</h3>
+        <p>Visit our website for updates on upcoming broadcasts and new content.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 TL TV · TWANGAA</p>
+  </footer>
+</body>
+</html>
