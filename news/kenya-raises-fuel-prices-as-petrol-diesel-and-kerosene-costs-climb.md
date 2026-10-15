@@ -2,7 +2,7 @@
 title: Kenya Raises Fuel Prices as Petrol, Diesel and Kerosene Costs Climb
 category: Kenya
 date: 2026-10-15
-image: https://share.google/YKIE906w6PtEZSzkr
+image: [https://share.google/YKIE906w6PtEZSzkr](https://upload.wikimedia.org/wikipedia/commons/8/86/Boda_guy3.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original)
 summary: Motorists and households across Kenya are facing higher fuel costs
   after EPRA announced new pump prices for petrol, diesel and kerosene. The
   increases come amid rising international petroleum import costs linked to
