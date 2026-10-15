@@ -1,0 +1,39 @@
+
+media:
+  input: media
+  output: /media
+
+content:
+  - name: news
+    label: News Stories
+    type: collection
+    path: news
+    filename: "{primary}.md"
+    fields:
+      - name: title
+        label: Headline
+        type: string
+        required: true
+      - name: category
+        label: Category
+        type: select
+        options:
+          values:
+            - Kenya
+            - World
+            - Business
+            - Sports
+            - Politics
+            - Entertainment
+      - name: date
+        label: Publication Date
+        type: date
+      - name: image
+        label: News Image URL
+        type: string
+      - name: summary
+        label: Short Summary
+        type: text
+      - name: body
+        label: Full Story
+        type: rich-text
