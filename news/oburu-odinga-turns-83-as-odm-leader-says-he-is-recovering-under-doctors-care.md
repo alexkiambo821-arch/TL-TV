@@ -2,7 +2,7 @@
 title: Oburu Odinga Turns 83 as ODM Leader Says He Is Recovering Under Doctors’ Care
 category: Kenya
 date: 2026-10-16
-image: https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search=Oburu%20Oginga
+image: https://www.presidentiallibrary.go.ke/sites/default/files/2026-08/President%20William%20Ruto%20and%20ODM%20Party%20Oburu%20Odinga%20during%20the%20launch%20of%20the%20Siaya%20community%20Digital%20Hub_8.3.2026%281%29.webp
 summary: ODM leader and Siaya Senator Oburu Odinga marked his 83rd birthday on
   15 October as he continued recovering under medical supervision. He said his
   doctors had directed him to observe strict bed rest and avoid public
