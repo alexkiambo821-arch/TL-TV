@@ -289,6 +289,78 @@
       border: 0;
     }
 
+    .youtube-gallery {
+      margin-top: 32px;
+    }
+
+    .youtube-gallery h3 {
+      margin-bottom: 8px;
+      font-size: 24px;
+    }
+
+    .youtube-gallery > p {
+      color: #aeb9d0;
+      margin-bottom: 18px;
+    }
+
+    .youtube-video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .youtube-video-card {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border: 1px solid #ffffff18;
+      border-radius: 14px;
+      background: #111a30;
+      color: #f5f7ff;
+      text-decoration: none;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .youtube-video-card:hover {
+      transform: translateY(-4px);
+      border-color: #4266a8;
+    }
+
+    .youtube-video-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #080c18;
+    }
+
+    .youtube-play {
+      position: absolute;
+      top: 28%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 34px;
+      border-radius: 10px;
+      background: #ff334f;
+      color: white;
+    }
+
+    .youtube-video-title {
+      display: block;
+      padding: 13px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .youtube-video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 600px) {
       .shows-grid {
         grid-template-columns: 1fr;
@@ -437,6 +509,40 @@
         Visit TL TV on YouTube ↗
       </a>
     </section>
+
+      <div class="youtube-gallery">
+        <h3>More from TL TV</h3>
+        <p>Watch more broadcasts, stories and moments from TL TV.</p>
+
+        <div class="youtube-video-grid">
+          <a class="youtube-video-card"
+             href="https://www.youtube.com/watch?v=1LIaOtQBzCE"
+             target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/1LIaOtQBzCE/hqdefault.jpg"
+                 alt="Watch TL TV video 1" loading="lazy">
+            <span class="youtube-play">▶</span>
+            <span class="youtube-video-title">TL TV Broadcast 01</span>
+          </a>
+
+          <a class="youtube-video-card"
+             href="https://www.youtube.com/watch?v=VRfNtL7WUCI"
+             target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/VRfNtL7WUCI/hqdefault.jpg"
+                 alt="Watch TL TV video 2" loading="lazy">
+            <span class="youtube-play">▶</span>
+            <span class="youtube-video-title">TL TV Broadcast 02</span>
+          </a>
+
+          <a class="youtube-video-card"
+             href="https://www.youtube.com/watch?v=izdACrNIMt8"
+             target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/izdACrNIMt8/hqdefault.jpg"
+                 alt="Watch TL TV video 3" loading="lazy">
+            <span class="youtube-play">▶</span>
+            <span class="youtube-video-title">TL TV Broadcast 03</span>
+          </a>
+        </div>
+      </div>
 
     <section class="shows-cta">
 
