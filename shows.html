@@ -4,51 +4,301 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shows | TL TV</title>
+  <meta name="theme-color" content="#080c18">
+  <meta name="description" content="Explore TL TV shows — entertainment, music, conversations and stories.">
+  <title>Shows | TL TV — TWANGAA</title>
   <link rel="stylesheet" href="style.css">
+
   <style>
-    .shows-hero {
-      padding: 60px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #10152d, #24113d, #111827);
-      border-radius: 16px;
-      margin: 25px 0;
+    .shows-page {
+      color: #f5f7ff;
+      padding-bottom: 40px;
     }
-    .shows-hero h1 { font-size: clamp(32px, 6vw, 58px); }
-    .shows-hero span { color: #ff334f; }
+
+    .shows-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(40px, 8vw, 90px) 24px;
+      text-align: left;
+      background:
+        radial-gradient(ellipse at 90% 10%, #1748a766, transparent 45%),
+        radial-gradient(ellipse at 5% 100%, #e8294d44, transparent 45%),
+        linear-gradient(135deg, #10152b, #090d1a 65%, #171026);
+      border: 1px solid #ffffff12;
+      border-radius: 22px;
+      margin: 28px 0 40px;
+    }
+
+    .shows-hero::after {
+      content: "TL";
+      position: absolute;
+      right: -10px;
+      bottom: -65px;
+      font-size: clamp(180px, 30vw, 360px);
+      font-weight: 900;
+      line-height: 1;
+      color: #ffffff06;
+      pointer-events: none;
+    }
+
+    .shows-eyebrow {
+      color: #ff526b;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .shows-hero h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 750px;
+      margin: 16px 0;
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -2px;
+    }
+
+    .shows-hero h1 span {
+      display: block;
+      color: #ff405c;
+    }
+
+    .shows-hero > p:not(.shows-eyebrow) {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+      color: #b9c3dc;
+      line-height: 1.8;
+    }
+
+    .shows-section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 35px 0 20px;
+    }
+
+    .shows-section-heading h2 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 34px);
+    }
+
+    .shows-section-heading p {
+      margin: 7px 0 0;
+      color: #9da9c4;
+      font-size: 14px;
+    }
+
     .shows-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-      margin: 25px 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin: 20px 0 45px;
     }
+
     .show-card {
-      background: #11172a;
-      border: 1px solid #252d46;
-      border-radius: 14px;
-      padding: 24px;
+      min-width: 0;
+      overflow: hidden;
+      background: linear-gradient(160deg, #111a30, #0c1120);
+      border: 1px solid #ffffff13;
+      border-radius: 18px;
+      transition: transform .2s ease, border-color .2s ease;
     }
+
+    .show-card:hover {
+      transform: translateY(-4px);
+      border-color: #4266a8;
+    }
+
     .show-art {
-      min-height: 130px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #25123e, #172b54, #451523);
-      font-size: 42px;
-      margin-bottom: 18px;
+      position: relative;
+      min-height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .show-card p { line-height: 1.6; }
+
+    .show-art::before,
+    .show-art::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
+    .show-art::before {
+      width: 190px;
+      height: 190px;
+      top: -85px;
+      right: -45px;
+      background: #ffffff15;
+    }
+
+    .show-art::after {
+      width: 150px;
+      height: 150px;
+      bottom: -100px;
+      left: -30px;
+      background: #ffffff12;
+    }
+
+    .show-art .show-symbol {
+      font-size: clamp(58px, 8vw, 86px);
+      filter: drop-shadow(0 8px 25px #0008);
+    }
+
+    .show-art .show-number {
+      position: absolute;
+      right: 16px;
+      bottom: 10px;
+      color: #ffffff70;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .art-unplugged {
+      background: radial-gradient(circle at 50% 40%, #713043, transparent 55%),
+                  linear-gradient(135deg, #220e20, #101a36);
+    }
+
+    .art-screentime {
+      background: radial-gradient(circle at 50% 40%, #174f9b, transparent 55%),
+                  linear-gradient(135deg, #10172e, #25103c);
+    }
+
+    .art-vibe {
+      background: radial-gradient(circle at 50% 40%, #7135a3, transparent 55%),
+                  linear-gradient(135deg, #170e32, #102849);
+    }
+
+    .art-street {
+      background: radial-gradient(circle at 50% 40%, #a94c30, transparent 55%),
+                  linear-gradient(135deg, #241526, #11283a);
+    }
+
+    .show-content {
+      padding: 22px;
+    }
+
     .show-tag {
       display: inline-block;
-      margin-top: 12px;
       padding: 6px 10px;
+      border: 1px solid #5478bc55;
+      border-radius: 30px;
+      background: #182745;
+      color: #a9caff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    .show-content h3 {
+      margin: 14px 0 9px;
+      font-size: clamp(20px, 3vw, 26px);
+    }
+
+    .show-content p {
+      margin: 0;
+      color: #aeb9d0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .show-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      color: #8f9bb7;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .show-status span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff405c;
+      box-shadow: 0 0 10px #ff405c88;
+    }
+
+    .shows-cta {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 6vw, 55px);
+      border: 1px solid #ffffff15;
       border-radius: 20px;
-      background: #202b47;
-      color: #8eb9ff;
-      font-size: 12px;
+      background: linear-gradient(110deg, #15182b, #111c35 65%, #241126);
+    }
+
+    .shows-cta h2 {
+      margin-top: 0;
+      font-size: clamp(25px, 4vw, 38px);
+    }
+
+    .shows-cta p {
+      max-width: 520px;
+      color: #b9c3d8;
+      line-height: 1.8;
+    }
+
+    .shows-contact-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 13px 20px;
+      border-radius: 8px;
+      background: #ff334f;
+      color: white;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+
+    .shows-contact-link:hover {
+      background: #d91e3a;
+    }
+
+    @media (max-width: 600px) {
+      .shows-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .shows-hero {
+        border-radius: 16px;
+        margin-top: 18px;
+      }
+
+      .shows-hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .show-art {
+        min-height: 175px;
+      }
+
+      .show-content {
+        padding: 19px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .show-card,
+      .shows-contact-link {
+        transition: none;
+      }
     }
   </style>
 </head>
+
 <body>
   <header class="topbar">
     <a class="logo" href="index.html">TL <span>TV</span></a>
@@ -58,55 +308,91 @@
   <nav class="nav">
     <a href="index.html">Home</a>
     <a href="news.html">News</a>
-    <a href="shows.html">Shows</a>
+    <a href="shows.html" aria-current="page">Shows</a>
     <a href="live.html">Live TV</a>
     <a href="production.html">Production</a>
     <a href="contact.html">Contact</a>
   </nav>
 
-  <main class="container">
+  <main class="container shows-page">
     <section class="shows-hero">
-      <p>YOUR SCREEN. YOUR STORIES.</p>
-      <h1>Discover <span>Our Shows</span></h1>
-      <p>Entertainment, conversations, culture and stories worth watching.</p>
+      <p class="shows-eyebrow">TL TV ORIGINALS</p>
+      <h1>Your stories.<span>Your screen.</span></h1>
+      <p>
+        From real conversations to music, culture and life on the streets,
+        discover the programmes bringing fresh perspectives to your screen.
+      </p>
     </section>
 
-    <h2>Explore Our Shows</h2>
+    <div class="shows-section-heading">
+      <div>
+        <h2>Explore our shows</h2>
+        <p>Four different vibes. One home — TL TV.</p>
+      </div>
+    </div>
 
-    <section class="shows-grid">
+    <section class="shows-grid" aria-label="TL TV programmes">
       <article class="show-card">
-        <div class="show-art">🎤</div>
-        <h3>TL Unplugged</h3>
-        <p>Real conversations, interviews and stories from interesting people.</p>
-        <span class="show-tag">Talk Show</span>
+        <div class="show-art art-unplugged">
+          <span class="show-symbol" aria-hidden="true">🎙️</span>
+          <span class="show-number">TL ORIGINAL 01</span>
+        </div>
+        <div class="show-content">
+          <span class="show-tag">TALK SHOW</span>
+          <h3>TL Unplugged</h3>
+          <p>Honest conversations, interviews and untold stories from people with something to say.</p>
+          <div class="show-status"><span></span>Programme spotlight</div>
+        </div>
       </article>
 
       <article class="show-card">
-        <div class="show-art">🎬</div>
-        <h3>Screen Time</h3>
-        <p>Entertainment updates, film discussions and pop culture.</p>
-        <span class="show-tag">Entertainment</span>
+        <div class="show-art art-screentime">
+          <span class="show-symbol" aria-hidden="true">🎬</span>
+          <span class="show-number">TL ORIGINAL 02</span>
+        </div>
+        <div class="show-content">
+          <span class="show-tag">ENTERTAINMENT</span>
+          <h3>Screen Time</h3>
+          <p>Movies, celebrity stories, entertainment updates and conversations about pop culture.</p>
+          <div class="show-status"><span></span>Entertainment spotlight</div>
+        </div>
       </article>
 
       <article class="show-card">
-        <div class="show-art">🎵</div>
-        <h3>Vibe Check</h3>
-        <p>Music, emerging talent and stories behind the sound.</p>
-        <span class="show-tag">Music</span>
+        <div class="show-art art-vibe">
+          <span class="show-symbol" aria-hidden="true">🎧</span>
+          <span class="show-number">TL ORIGINAL 03</span>
+        </div>
+        <div class="show-content">
+          <span class="show-tag">MUSIC & CULTURE</span>
+          <h3>Vibe Check</h3>
+          <p>Meet emerging artists, discover new sounds and hear the stories behind the music.</p>
+          <div class="show-status"><span></span>Music spotlight</div>
+        </div>
       </article>
 
       <article class="show-card">
-        <div class="show-art">🌍</div>
-        <h3>Street Stories</h3>
-        <p>People, places and everyday stories from our communities.</p>
-        <span class="show-tag">Documentary</span>
+        <div class="show-art art-street">
+          <span class="show-symbol" aria-hidden="true">🌍</span>
+          <span class="show-number">TL ORIGINAL 04</span>
+        </div>
+        <div class="show-content">
+          <span class="show-tag">DOCUMENTARY</span>
+          <h3>Street Stories</h3>
+          <p>Real people, local places and everyday experiences shaping our communities.</p>
+          <div class="show-status"><span></span>Community spotlight</div>
+        </div>
       </article>
     </section>
 
-    <section class="shows-hero">
-      <h2>Have a story worth sharing?</h2>
-      <p>Connect with TL TV and let's bring your idea to the screen.</p>
-      <a href="contact.html">Contact TL TV</a>
+    <section class="shows-cta">
+      <p class="shows-eyebrow">LET'S CREATE SOMETHING</p>
+      <h2>Got a story worth telling?</h2>
+      <p>
+        Know a talented artist, have a great idea or want to work with TL TV?
+        Let's bring your story to the screen.
+      </p>
+      <a class="shows-contact-link" href="contact.html">Connect with TL TV ↗</a>
     </section>
   </main>
 
