@@ -130,26 +130,31 @@
   <div id="cms-news-list">Loading latest stories...</div>
 </section>
 
+
 <script>
 (async function () {
   const list = document.getElementById("cms-news-list");
-
-  // Read the article directly, without using the GitHub API.
-  const articleFiles = [
-    "https://raw.githubusercontent.com/alexkiambo821-arch/TL-TV/main/news/kenya-raises-fuel-prices-as-petrol-diesel-and-kerosene-costs-climb.md"
-  ];
+  const api =
+    "https://api.github.com/repos/alexkiambo821-arch/TL-TV/contents/news?ref=main";
 
   try {
-    list.textContent = "";
+    list.textContent = "Loading latest news...";
 
-    for (const url of articleFiles) {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Article could not load");
+    const response = await fetch(api);
+    if (!response.ok) throw new Error("Could not load news folder");
 
-      const markdown = await response.text();
+    const files = await response.json();
+    const markdownFiles = files.filter(file =>
+      file.type === "file" && file.name.endsWith(".md")
+    );
+
+    const articles = await Promise.all(markdownFiles.map(async file => {
+      const res = await fetch(file.download_url);
+      if (!res.ok) return null;
+
+      const markdown = await res.text();
       const match = markdown.match(/^---\s*\r?\n([\s\S]*?)\r?\n---/);
-
-      if (!match) continue;
+      if (!match) return null;
 
       const meta = {};
       match[1].split(/\r?\n/).forEach(line => {
@@ -159,14 +164,36 @@
         }
       });
 
-      if (!meta.title) continue;
+      return meta.title ? { meta, markdown, frontMatter: match[0] } : null;
+    }));
 
+    articles
+      .filter(Boolean)
+      .sort((a, b) =>
+        (Date.parse(b.meta.date || "") || 0) -
+        (Date.parse(a.meta.date || "") || 0)
+      );
+
+    list.replaceChildren();
+
+    const valid = articles.filter(Boolean).sort((a, b) =>
+      (Date.parse(b.meta.date || "") || 0) -
+      (Date.parse(a.meta.date || "") || 0)
+    );
+
+    if (!valid.length) {
+      list.textContent = "No news stories found yet.";
+      return;
+    }
+
+    valid.forEach(({ meta, markdown, frontMatter }) => {
       const card = document.createElement("article");
       card.style.cssText =
-        "margin:24px 0;padding:20px;border:1px solid #34344f;border-radius:12px;background:#101326;";
+        "margin:24px 0;padding:20px;border:1px solid #34344f;" +
+        "border-radius:12px;background:#101326;";
 
       const category = document.createElement("p");
-      category.textContent = meta.category || "Kenya";
+      category.textContent = meta.category || "News";
       category.style.color = "#62a5ff";
       card.appendChild(category);
 
@@ -185,6 +212,7 @@
         const img = document.createElement("img");
         img.src = meta.image;
         img.alt = meta.title;
+        img.loading = "lazy";
         img.style.cssText =
           "width:100%;max-height:400px;object-fit:cover;border-radius:8px;";
         img.onerror = () => img.remove();
@@ -195,46 +223,39 @@
       summary.textContent = meta.summary || "";
       card.appendChild(summary);
 
-      const body = markdown.slice(match[0].length).trim();
       const story = document.createElement("div");
       story.style.cssText = "line-height:1.8;margin-top:20px;";
 
-      body.split(/\r?\n/).forEach(line => {
-        const text = line.trim();
-        if (!text) return;
+      markdown.slice(frontMatter.length).trim().split(/\r?\n/).forEach(line => {
+        const value = line.trim();
+        if (!value) return;
 
-        let element;
-        if (text.startsWith("### ")) {
-          element = document.createElement("h4");
-          element.textContent = text.slice(4);
-        } else if (text.startsWith("## ")) {
-          element = document.createElement("h3");
-          element.textContent = text.slice(3);
-        } else if (text.startsWith("# ")) {
-          element = document.createElement("h3");
-          element.textContent = text.slice(2);
+        let el;
+        if (value.startsWith("### ")) {
+          el = document.createElement("h4");
+          el.textContent = value.slice(4);
+        } else if (value.startsWith("## ")) {
+          el = document.createElement("h3");
+          el.textContent = value.slice(3);
+        } else if (value.startsWith("# ")) {
+          el = document.createElement("h3");
+          el.textContent = value.slice(2);
         } else {
-          element = document.createElement("p");
-          element.textContent = text;
+          el = document.createElement("p");
+          el.textContent = value;
         }
-
-        story.appendChild(element);
+        story.appendChild(el);
       });
 
       card.appendChild(story);
       list.appendChild(card);
-    }
-
-    if (!list.children.length) {
-      list.textContent = "No readable news stories found.";
-    }
+    });
   } catch (error) {
     list.textContent = "News could not load. Please try again later.";
   }
 })();
 </script>
 
-</script>
 
 </body>
 </html>
